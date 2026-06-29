@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Fez Luxury Hotels — Location Relative to Medina</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root{
+    --ink:#0b1f3a;
+    --rule:#d8d2c4;
+    --paper:#f7f4ec;
+    --amber:#b8860b;
+    --amber-soft:#e6c068;
+    --blue:#1f5fa8;
+    --muted:#5a6573;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  header{
+    background:#fff;border-bottom:2px solid var(--ink);
+    padding:18px 28px 14px;
+  }
+  header .eyebrow{
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--amber);font-weight:700;margin-bottom:4px;
+  }
+  header h1{
+    margin:0;font-family:Georgia,"Times New Roman",serif;
+    font-weight:600;font-size:22px;letter-spacing:.2px;
+  }
+  header .subtitle{
+    margin-top:4px;font-size:12px;color:var(--muted);
+  }
+  .wrap{padding:18px 28px 28px;max-width:1400px;margin:0 auto}
+  #map{
+    height:74vh;min-height:560px;width:100%;
+    border:1px solid var(--rule);
+    box-shadow:0 6px 22px rgba(11,31,58,.10), 0 1px 2px rgba(11,31,58,.06);
+    background:#eef0f2;
+  }
+  .legend{
+    background:#fff;padding:12px 14px;border:1px solid var(--rule);
+    box-shadow:0 2px 8px rgba(11,31,58,.08);font-size:12px;line-height:1.5;
+    min-width:210px;
+  }
+  .legend .title{
+    font-family:Georgia,serif;font-size:13px;font-weight:700;
+    margin-bottom:8px;border-bottom:1px solid var(--rule);padding-bottom:6px;
+    letter-spacing:.3px;
+  }
+  .legend .row{display:flex;align-items:center;margin:5px 0;gap:8px}
+  .swatch{width:14px;height:14px;border:1px solid #444;flex-shrink:0}
+  .sw-medina{background:rgba(184,134,11,.25);border-color:var(--amber)}
+  .sw-amber{background:var(--amber-soft);border-color:var(--amber);border-radius:50%}
+  .sw-blue{background:var(--blue);border-color:#0c3b6e;border-radius:50%}
+  .hotel-pin{
+    display:flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    border:2px solid #fff;box-shadow:0 0 0 1.5px #222, 0 2px 4px rgba(0,0,0,.35);
+    color:#fff;font-size:11px;font-weight:700;font-family:Helvetica,Arial,sans-serif;
+  }
+  .pin-amber{background:var(--amber)}
+  .pin-blue{background:var(--blue)}
+  .hotel-label{
+    background:rgba(255,255,255,.94);
+    border:1px solid var(--ink);
+    padding:2px 6px;font-size:11px;font-weight:600;color:var(--ink);
+    font-family:Helvetica,Arial,sans-serif;
+    white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.12);
+  }
+  .leaflet-tooltip.hotel-label:before{display:none}
+  .popup h3{
+    margin:0 0 4px;font-family:Georgia,serif;font-size:14px;
+    border-bottom:1px solid var(--rule);padding-bottom:4px;
+  }
+  .popup .meta{font-size:11px;color:var(--muted);margin-bottom:6px}
+  .popup table{font-size:12px;border-collapse:collapse;width:100%}
+  .popup td{padding:2px 6px 2px 0;vertical-align:top}
+  .popup td.k{color:var(--muted);width:42%}
+  .popup .tag{
+    display:inline-block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+    padding:2px 6px;font-weight:700;margin-bottom:4px;
+  }
+  .tag-in{background:var(--amber);color:#fff}
+  .tag-out{background:var(--blue);color:#fff}
+  footer{
+    padding:14px 28px 28px;font-size:11px;color:var(--muted);
+    border-top:1px solid var(--rule);background:#fff;
+  }
+  footer strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Trip Planning · Morocco</div>
+  <h1>Fez Luxury Hotels — Location Relative to Medina</h1>
+  <div class="subtitle">Labor Day 2026 trip planning · 2026-06-28 · Prepared for W. Young</div>
+</header>
+
+<div class="wrap">
+  <div id="map"></div>
+</div>
+
+<footer>
+  <strong>Methodology:</strong> Walking time = haversine distance to nearest medina gate × 1.3 (medina navigation overhead) ÷ 5 km/h. Gate set: Bab Bou Jeloud (W, main tourist entry), Bab Guissa (N), Bab Ftouh (E), Bab R'cif (S). Hotels inside the medina report time to Bab Bou Jeloud specifically.
+  &nbsp;·&nbsp; <strong>Hotel Sahrai</strong> sits on the Ville Nouvelle hilltop; on-foot to Bab Bou Jeloud is ~25–30 min downhill (steeper return); a cab is ~10–15 min and is the practical default.
+  &nbsp;·&nbsp; <strong>Caveats:</strong> Interior-medina riad coordinates are derb-level approximations (±50–100m). The medina polygon is the OpenStreetMap administrative boundary for <em>Arrondissement de Fès-Médina</em> (OSM relation 2799583, admin_level=10) &mdash; the same dataset Google Maps cross-references for the highlighted historic district. 136 vertices, fetched via Overpass API 2026-06-28. Verify exact pickup points with each property before arrival.
+</footer>
+
+<script>
+// ---------- Data ----------
+const gates = {
+  "Bab Bou Jeloud": [34.0639, -4.9897],
+  "Bab Guissa":     [34.0697, -4.9760],
+  "Bab Ftouh":      [34.0577, -4.9645],
+  "Bab R'cif":      [34.0590, -4.9810]
+};
+
+// Authoritative OSM polygon — relation 2799583 "Arrondissement de Fès-Médina"
+// (admin_level=10). Same OSM dataset Google Maps cross-references for the
+// highlighted historic medina district. Fetched from Overpass API 2026-06-28.
+// 136 vertices, stitched from 5 outer ways into one closed ring.
+const medinaPolygon = [
+  [34.060412, -4.987869], [34.060737, -4.987464], [34.061063, -4.987188],
+  [34.061373, -4.986986], [34.061673, -4.986860], [34.062562, -4.986618],
+  [34.063241, -4.986393], [34.063728, -4.985965], [34.064126, -4.985425],
+  [34.066063, -4.982920], [34.066645, -4.982330], [34.067836, -4.981558],
+  [34.068096, -4.981261], [34.068401, -4.980731], [34.068507, -4.980185],
+  [34.068570, -4.979653], [34.068605, -4.979020], [34.068761, -4.978512],
+  [34.069023, -4.977915], [34.069267, -4.977073], [34.069623, -4.976832],
+  [34.069900, -4.976856], [34.070264, -4.976953], [34.070412, -4.976932],
+  [34.070541, -4.976880], [34.070609, -4.976817], [34.070645, -4.976751],
+  [34.070692, -4.976652], [34.070718, -4.976547], [34.070712, -4.976413],
+  [34.070214, -4.975566], [34.070027, -4.975185], [34.070081, -4.974718],
+  [34.070227, -4.974664], [34.070574, -4.974798], [34.070743, -4.975104],
+  [34.071008, -4.975425], [34.071255, -4.975159], [34.071207, -4.974337],
+  [34.071511, -4.973338], [34.071560, -4.972585], [34.070383, -4.972438],
+  [34.069107, -4.970121], [34.069327, -4.969468], [34.069412, -4.969402],
+  [34.069518, -4.969124], [34.070985, -4.969072], [34.071192, -4.968855],
+  [34.071232, -4.968560], [34.070977, -4.967971], [34.070600, -4.967281],
+  [34.069845, -4.965708], [34.069713, -4.965541], [34.069561, -4.965439],
+  [34.069110, -4.965458], [34.068681, -4.965572], [34.067223, -4.965818],
+  [34.066868, -4.965572], [34.066717, -4.965314], [34.066654, -4.964627],
+  [34.067170, -4.963716], [34.067223, -4.963522], [34.066880, -4.962015],
+  [34.066696, -4.961859], [34.065650, -4.962192], [34.064903, -4.962332],
+  [34.064015, -4.961827], [34.062984, -4.959520], [34.062735, -4.959344],
+  [34.062264, -4.961623], [34.061686, -4.962348], [34.060477, -4.963147],
+  [34.060051, -4.963635], [34.059486, -4.964681], [34.059028, -4.965899],
+  [34.058700, -4.966596], [34.057709, -4.967508], [34.057455, -4.968007],
+  [34.056877, -4.969847], [34.056398, -4.971172], [34.056029, -4.971574],
+  [34.054135, -4.972696], [34.053865, -4.972901], [34.053740, -4.972991],
+  [34.053504, -4.973495], [34.053420, -4.974080], [34.053495, -4.974519],
+  [34.053620, -4.974820], [34.053793, -4.975034], [34.054372, -4.975475],
+  [34.054406, -4.975501], [34.054975, -4.975920], [34.055260, -4.976483],
+  [34.055357, -4.977196], [34.055189, -4.977856], [34.054820, -4.978333],
+  [34.053722, -4.979251], [34.053384, -4.979846], [34.053153, -4.980522],
+  [34.053020, -4.981252], [34.052838, -4.981772], [34.052384, -4.982405],
+  [34.051966, -4.982974], [34.051673, -4.983451], [34.051544, -4.983875],
+  [34.051473, -4.984342], [34.051482, -4.984975], [34.051513, -4.986841],
+  [34.051477, -4.988140], [34.051411, -4.988714], [34.051180, -4.989406],
+  [34.050469, -4.990972], [34.051011, -4.990505], [34.052189, -4.989159],
+  [34.052282, -4.988950], [34.052909, -4.987051], [34.053091, -4.986831],
+  [34.053402, -4.986611], [34.054886, -4.985667], [34.055394, -4.985313],
+  [34.055439, -4.985278], [34.055503, -4.985230], [34.055556, -4.985190],
+  [34.055603, -4.985148], [34.055644, -4.985108], [34.055687, -4.985054],
+  [34.055733, -4.984991], [34.055809, -4.984892], [34.055913, -4.984732],
+  [34.056438, -4.983939], [34.056713, -4.984315], [34.057753, -4.985023],
+  [34.058273, -4.985860], [34.058749, -4.986166], [34.059673, -4.987051],
+  [34.060412, -4.987869]
+];
+
+// Hotels — coordinates are best-available; medina riads are derb-level approximations
+const hotels = [
+  { name:"Karawan Riad",            lat:34.0648, lng:-4.9810, inside:true,  addr:"21 Derb Skalia, Douh" },
+  { name:"Riad Laaroussa Hotel & Spa", lat:34.0644, lng:-4.9820, inside:true, addr:"3 Derb Bechara" },
+  { name:"Riad Fes (Relais & Châteaux)", lat:34.0612, lng:-4.9803, inside:true, addr:"5 Derb Ben Slimane, Zerbtana" },
+  { name:"Riad Mayfez Suites & Spa", lat:34.0625, lng:-4.9772, inside:true, addr:"Medina, Fez" },
+  { name:"Hotel Sahrai",            lat:34.0436, lng:-4.9922, inside:false, addr:"Bab Lghoul, Dhar El Mehraz (Ville Nouvelle)" },
+  { name:"Palais Faraj Suites & Spa", lat:34.0598, lng:-4.9788, inside:true, addr:"16-18 Derb Bensouda, Bab Ziat" },
+  { name:"Palais Amani",            lat:34.0668, lng:-4.9720, inside:true, addr:"12 Derb El Miter, Oued Zhoune" },
+  { name:"Riad El Amine Fes",       lat:34.0628, lng:-4.9755, inside:true, addr:"Medina, Fez" }
+];
+
+// ---------- Geo helpers ----------
+function haversineKm(a, b){
+  const R=6371, toRad=x=>x*Math.PI/180;
+  const dLat=toRad(b[0]-a[0]), dLng=toRad(b[1]-a[1]);
+  const s=Math.sin(dLat/2)**2 + Math.cos(toRad(a[0]))*Math.cos(toRad(b[0]))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));
+}
+function nearestGate(p){
+  let best=null;
+  for(const [name,coord] of Object.entries(gates)){
+    const km=haversineKm(p,coord);
+    if(!best||km<best.km) best={name,km,coord};
+  }
+  return best;
+}
+function walkTime(km){
+  const adjKm = km*1.3;
+  const minutes = (adjKm/5)*60;
+  return { adjKm, minutes };
+}
+
+// ---------- Map ----------
+const map = L.map('map', { zoomControl:true, scrollWheelZoom:true })
+  .setView([34.058, -4.980], 14);
+
+// CARTO Voyager — cleanest free OSM raster, closest to modern Google Maps look
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  maxZoom: 20,
+  subdomains: 'abcd',
+  attribution: '© OpenStreetMap contributors © CARTO'
+}).addTo(map);
+
+// Medina polygon — OSM relation 2799583 (Arrondissement de Fès-Médina, admin_level=10)
+// Styled to match Google Maps highlighted-historic-district aesthetic
+L.polygon(medinaPolygon, {
+  color:'#b8860b', weight:1.5, opacity:0.6,
+  fillColor:'#d4a017', fillOpacity:0.18,
+  smoothFactor:0.5
+}).addTo(map).bindTooltip("Fes el-Bali (medina) — OpenStreetMap admin boundary",
+  { sticky:true, className:'hotel-label' });
+
+// Gate markers (small)
+for(const [name,coord] of Object.entries(gates)){
+  L.circleMarker(coord, {
+    radius:4, color:'#5a3a00', weight:1.5, fillColor:'#f0d27a', fillOpacity:1
+  }).addTo(map).bindTooltip(name, { className:'hotel-label', direction:'top', offset:[0,-4] });
+}
+
+// Hotels
+hotels.forEach((h, i) => {
+  const cls = h.inside ? 'pin-amber' : 'pin-blue';
+  const icon = L.divIcon({
+    className:'',
+    html:`<div class="hotel-pin ${cls}">${i+1}</div>`,
+    iconSize:[22,22],
+    iconAnchor:[11,11]
+  });
+  const gate = nearestGate([h.lat,h.lng]);
+  const wt = walkTime(gate.km);
+  const toBBJ = walkTime(haversineKm([h.lat,h.lng], gates["Bab Bou Jeloud"]));
+
+  const popup = `
+    <div class="popup">
+      <span class="tag ${h.inside?'tag-in':'tag-out'}">${h.inside?'Inside medina':'Outside medina'}</span>
+      <h3>${i+1}. ${h.name}</h3>
+      <div class="meta">${h.addr}</div>
+      <table>
+        <tr><td class="k">Nearest gate</td><td>${gate.name}</td></tr>
+        <tr><td class="k">Walk to nearest gate</td><td>${wt.minutes.toFixed(0)} min (${wt.adjKm.toFixed(2)} km)</td></tr>
+        <tr><td class="k">Walk to Bab Bou Jeloud</td><td>${toBBJ.minutes.toFixed(0)} min (${toBBJ.adjKm.toFixed(2)} km)</td></tr>
+        ${!h.inside?`<tr><td class="k">Cab to Bab Bou Jeloud</td><td>~10–15 min</td></tr>`:''}
+        <tr><td class="k">Lat / Lng</td><td>${h.lat.toFixed(4)}, ${h.lng.toFixed(4)}</td></tr>
+      </table>
+    </div>`;
+
+  const marker = L.marker([h.lat,h.lng], { icon }).addTo(map);
+  marker.bindPopup(popup, { maxWidth:300 });
+  marker.bindTooltip(`${i+1}. ${h.name}`, {
+    permanent:true, direction:'right', offset:[12,0], className:'hotel-label'
+  });
+});
+
+// Legend
+const legend = L.control({ position:'topright' });
+legend.onAdd = function(){
+  const d = L.DomUtil.create('div','legend');
+  d.innerHTML = `
+    <div class="title">Legend</div>
+    <div class="row"><span class="swatch sw-medina"></span> Medina boundary (Fes el-Bali) via OpenStreetMap &mdash; same data Google Maps uses for the highlighted historic district</div>
+    <div class="row"><span class="swatch sw-amber"></span> Hotel inside medina</div>
+    <div class="row"><span class="swatch sw-blue"></span> Hotel outside medina</div>
+    <div class="row" style="margin-top:8px;color:#5a6573;font-size:11px">
+      Click any pin for walking-time detail.<br/>
+      Small tan dots = medina gates.
+    </div>`;
+  return d;
+};
+legend.addTo(map);
+
+// Fit bounds to show all
+const all = hotels.map(h=>[h.lat,h.lng]).concat(medinaPolygon);
+map.fitBounds(all, { padding:[40,40] });
+</script>
+</body>
+</html>
