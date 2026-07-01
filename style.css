@@ -740,3 +740,22 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .pill-stacked .pill-line1 { font-size: 10px; }
   .pill-stacked .pill-line2 { font-size: 9px; }
 }
+
+/* Group subtitle */
+.group-sub {
+  font-size: 14px; color: var(--muted); margin: -8px 0 16px;
+  max-width: 560px; line-height: 1.5;
+}
+
+/* Additional pill colors */
+.pill-blue { background: #e3ecf3; color: #2b4a68; }
+.pill-gray { background: #ece8e0; color: #625a4d; }
+
+/* Additional card border variants (travel spine) */
+.bcard.planned { border-left: 3px solid #94867a; background: #fbfaf7; }
+.bcard.noadvance { border-left: 3px solid #6f8ba8; background: #f7fafc; }
+
+@media (max-width: 640px) {
+  .group-sub { font-size: 13px; margin: -6px 0 12px; }
+}
+.dot-blue { background: #4a6e91; }
