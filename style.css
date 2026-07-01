@@ -520,3 +520,193 @@ html, body { max-width: 100%; overflow-x: hidden; }
     text-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.6);
   }
 }
+
+/* ============================================================
+   BOOKING CARDS SYSTEM — professional agency-tier UI
+   Added 2026-07-01 (rebuild per Billy feedback)
+   ============================================================ */
+
+/* Section header block */
+.section-header { margin-bottom: 20px; }
+
+/* Status strip at top of Confirmed section */
+.status-strip {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin: 16px 0 32px;
+}
+.status-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); color: var(--ink);
+  padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--rule);
+  font-size: 13px; font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.status-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-green { background: #4a8b3a; }
+.dot-amber { background: #d19a00; }
+.dot-gray { background: #94867a; }
+
+/* Booking group */
+.booking-group { margin: 36px 0; }
+.group-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 500;
+  margin: 0 0 16px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink);
+}
+.group-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--terracotta); color: #fff;
+  font-size: 14px; font-weight: 400;
+  flex-shrink: 0;
+}
+
+/* Booking cards */
+.booking-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 900px) {
+  .booking-cards { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+.bcard {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.bcard:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 20px rgba(0,0,0,0.06); }
+.bcard.confirmed { border-left: 3px solid #4a8b3a; }
+.bcard.inprogress { border-left: 3px solid #d19a00; background: #fdfaf3; }
+
+.bcard-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px;
+}
+.bcard-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 500;
+  line-height: 1.25; color: var(--ink);
+  flex: 1;
+}
+.bcard-title .dim { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted); font-weight: 400; }
+
+/* Pills */
+.pill {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+  white-space: nowrap; flex-shrink: 0;
+  text-transform: uppercase;
+}
+.pill-green { background: #e7f0e2; color: #3d6f30; }
+.pill-amber { background: #fbf0d8; color: #8c6b0f; }
+.pill-gray { background: #eeeae4; color: #6b5f52; }
+
+/* Card metadata rows */
+.bcard-meta { display: grid; gap: 6px; font-size: 14px; }
+.bcard-meta > div {
+  display: grid; grid-template-columns: 84px 1fr; gap: 12px;
+  align-items: baseline;
+}
+.bcard-meta .k {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); font-weight: 600;
+}
+.bcard-meta .v { color: var(--ink); font-size: 14px; line-height: 1.45; }
+
+/* Skipped details */
+.skipped-details {
+  margin: 24px 0;
+  background: #f2ede4;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.skipped-details summary {
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 500;
+  color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+  list-style: none;
+}
+.skipped-details summary::-webkit-details-marker { display: none; }
+.skipped-details summary::after {
+  content: '+'; margin-left: auto;
+  font-size: 22px; color: var(--muted);
+  transition: transform 0.2s;
+}
+.skipped-details[open] summary::after { content: '−'; }
+.skipped-list { margin-top: 16px; display: grid; gap: 10px; font-size: 14px; color: var(--ink-soft); }
+.skipped-list strong { color: var(--ink); }
+
+/* ============================================================
+   MOBILE — refined for iPhone
+   ============================================================ */
+@media (max-width: 640px) {
+  .status-strip { gap: 8px; margin: 12px 0 24px; }
+  .status-chip { font-size: 12px; padding: 6px 12px; }
+
+  .group-title { font-size: 19px; margin-bottom: 12px; }
+  .group-icon { width: 26px; height: 26px; font-size: 13px; border-radius: 7px; }
+
+  .booking-group { margin: 28px 0; }
+  .booking-cards { gap: 10px; }
+
+  .bcard { padding: 16px; border-radius: 12px; }
+  .bcard-head { gap: 10px; margin-bottom: 10px; }
+  .bcard-title { font-size: 16px; }
+  .bcard-title .dim { display: block; font-size: 12px; margin-top: 2px; }
+
+  .pill { font-size: 10px; padding: 3px 8px; }
+
+  .bcard-meta { gap: 5px; font-size: 13px; }
+  .bcard-meta > div { grid-template-columns: 72px 1fr; gap: 10px; }
+  .bcard-meta .k { font-size: 10px; }
+  .bcard-meta .v { font-size: 13px; line-height: 1.4; }
+
+  .skipped-details { padding: 14px 16px; margin: 20px 0; }
+  .skipped-details summary { font-size: 15px; }
+  .skipped-list { font-size: 13px; }
+}
+
+/* ============================================================
+   MOBILE BOTTOM NAV — like real apps do it
+   ============================================================ */
+.bottom-nav {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--rule);
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+}
+.bottom-nav-inner {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 500px; margin: 0 auto;
+}
+.bottom-nav a {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 6px 4px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--ink-soft); text-decoration: none; border: none;
+}
+.bottom-nav a .bn-icon {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.bottom-nav a:active { color: var(--terracotta); }
+
+@media (max-width: 640px) {
+  .bottom-nav { display: block; }
+  body { padding-bottom: 80px; }
+  /* Hide the top nav on mobile — bottom nav takes over */
+  .nav { display: none; }
+  /* Scroll offset adjusts too */
+  html { scroll-padding-top: 12px; }
+}

@@ -40,54 +40,237 @@
 
 <!-- ============= CONFIRMED BOOKINGS ============= -->
 <section id="confirmed">
-  <div class="section-eyebrow">As of 2026-07-01</div>
-  <h2 class="section-title">Confirmed bookings</h2>
-  <div class="rule"></div>
-  <p class="section-lede">Everything with a confirmation number below is paid + locked. In-progress inquiries listed at the bottom.</p>
-
-  <div class="tbl-wrap">
-    <table class="data">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Date</th>
-          <th>Confirmation</th>
-          <th>Booking channel</th>
-          <th>Guest on record</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="locked"><td><strong>AA 7951 / RAM codeshare</strong> — JFK → CMN direct</td><td>Fri 8/28 8:45 PM → Sat 8/29 8:50 AM</td><td>PNR WCQXNR</td><td>American Airlines</td><td>Billy only</td></tr>
-        <tr class="locked"><td><strong>AA 7952 / RAM codeshare</strong> — CMN → JFK direct</td><td>Mon 9/7 6:00 AM → 8:50 AM (Labor Day)</td><td>Same PNR</td><td>American Airlines</td><td>Billy only</td></tr>
-        <tr class="locked"><td><strong>Ryanair FR 6730</strong> — FEZ → RAK · Priority + 2 cabin bags + seats 02E/02F + Fast Track</td><td>Mon 8/31 5:50 AM → 6:55 AM</td><td>Ryanair itin</td><td>Ryanair direct</td><td>Both pax</td></tr>
-        <tr class="locked"><td><strong>Riad Fès Relais &amp; Châteaux</strong> · Fez 2 nts</td><td>Sat 8/29 – Mon 8/31</td><td>Chase Travel 2497932249</td><td>Chase Travel</td><td>Billy</td></tr>
-        <tr class="locked"><td><strong>Kasbah Tamadot</strong> (Virgin Limited Edition) · Atlas 3 nts</td><td>Mon 8/31 – Thu 9/3</td><td>via Virgin / Chase</td><td>Chase Edit hybrid</td><td><strong>Tiffany Sou</strong></td></tr>
-        <tr class="locked"><td><strong>La Mamounia</strong> · Marrakech 3 nts</td><td>Thu 9/3 – Sun 9/6</td><td>Chase Travel 2497573779</td><td>Chase Travel</td><td>Billy</td></tr>
-        <tr class="locked"><td><strong>Casablanca Marriott Hotel</strong> · CMN 1 nt <small class="dim">(NOT Four Points)</small></td><td>Sun 9/6 – Mon 9/7</td><td>Marriott Bonvoy #78815435</td><td>Marriott Bonvoy</td><td>Billy</td></tr>
-        <tr class="locked"><td><strong>La Grande Table Marocaine</strong> @ Royal Mansour Marrakech · Khiwan Alrabia prix fixe MAD 1,800/pax</td><td>Thu 9/3 · 8:00 PM</td><td>via online form 7/1</td><td>Direct</td><td>2 pax</td></tr>
-        <tr class="locked"><td><strong>L'Asiatique par Jean-Georges</strong> @ La Mamounia · dinner à la carte</td><td>Sat 9/5 · 7:30 PM</td><td>#4G7RHD4RCD9E</td><td>Zenchef</td><td>2 pax</td></tr>
-        <tr class="locked"><td><strong>Le Rooftop</strong> @ Royal Mansour Casablanca</td><td>Sun 9/6 · 8:00 PM</td><td>via online form 7/1</td><td>Direct</td><td>2 pax</td></tr>
-        <tr class="locked"><td><strong>Casablanca Half-Day Tour + Hassan II Mosque</strong> · operated by City Services Tour · +212 700 794 885</td><td>Sun 9/6 · 3:00 PM</td><td>BS9OYD / BR-1417654047</td><td>Marriott Bonvoy Tours &amp; Activities</td><td>2 pax</td></tr>
-      </tbody>
-    </table>
+  <div class="section-header">
+    <div class="section-eyebrow">Bookings · Updated 2026-07-01</div>
+    <h2 class="section-title">Confirmed &amp; open</h2>
+    <div class="rule"></div>
   </div>
 
-  <div class="insight" style="background:#fff5e6;border-left:6px solid #c98a30;">
-    <div><div class="label" style="color:#c98a30;">In-progress inquiries</div></div>
-    <div>
-      <h4>Sent 2026-07-01 — awaiting confirmation</h4>
-      <p><strong>Riad Fès Sat 8/29 van + guide</strong> (CMN → Moulay Idriss → Volubilis → Fez lean drive day) · <strong>Agafay Desert buggy sunset + Bedouin dinner</strong> (Fri 9/4) · <strong>The Ruined Garden</strong> Fez dinner (Sat 8/29 7:30 PM) · <strong>Nur</strong> Fez dinner (Sun 8/30) via WhatsApp · <strong>Kasbah Tamadot</strong> bundle — Toubkal foothills guided hike Wed 9/2 AM + Kasbah cooking class Wed 9/2 4 PM.</p>
-      <p><strong>Also outstanding:</strong> Plusgrade upgrade bids for AA 7951 / 7952 (bidding windows open ~30 days pre-departure). ONCF Al Boraq train MAR → CMN Sun 9/6 (walk-up OK, no advance booking needed).</p>
+  <div class="status-strip">
+    <div class="status-chip"><span class="dot dot-green"></span> <strong>11</strong> confirmed</div>
+    <div class="status-chip"><span class="dot dot-amber"></span> <strong>5</strong> in progress</div>
+    <div class="status-chip"><span class="dot dot-gray"></span> <strong>5</strong> skipped</div>
+  </div>
+
+  <!-- Flights -->
+  <div class="booking-group">
+    <h3 class="group-title"><span class="group-icon">✈</span> Flights</h3>
+    <div class="booking-cards">
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">JFK → CMN <span class="dim">· AA 7951 / RAM codeshare</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">Date</span><span class="v">Fri 8/28 8:45 PM → Sat 8/29 8:50 AM</span></div>
+          <div><span class="k">Class</span><span class="v">Economy (O) · direct nonstop 7h05m</span></div>
+          <div><span class="k">Passenger</span><span class="v">Billy only · Tiffany separate ticket</span></div>
+          <div><span class="k">Ref</span><span class="v">PNR WCQXNR</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">CMN → JFK <span class="dim">· AA 7952 / RAM codeshare</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">Date</span><span class="v">Mon 9/7 6:00 AM → 8:50 AM (Labor Day)</span></div>
+          <div><span class="k">Class</span><span class="v">Economy (O) · direct nonstop 7h50m</span></div>
+          <div><span class="k">Passenger</span><span class="v">Billy only</span></div>
+          <div><span class="k">Ref</span><span class="v">Same PNR</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">FEZ → RAK <span class="dim">· Ryanair FR 6730</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">Date</span><span class="v">Mon 8/31 · 5:50 AM → 6:55 AM (1h05m)</span></div>
+          <div><span class="k">Extras</span><span class="v">Priority + 2 cabin bags · seats 02E / 02F · Fast Track</span></div>
+          <div><span class="k">Passengers</span><span class="v">Billy + Tiffany</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="insight">
-    <div><div class="label">Explicitly skipped</div></div>
-    <div>
-      <h4>What we're NOT doing — and why</h4>
-      <p><strong>Meknes proper</strong> (kept Moulay Idriss viewpoint on the Sat drive) · <strong>Terres d'Amanar</strong> Tue 9/1 (Wed's Toubkal hike + cooking class beats it on register-fit and property-ROI) · <strong>Rick's Café Casablanca</strong> (closed for annual summer break; replaced by Le Rooftop) · <strong>Essaouira day trip</strong> (3-base rule — don't add a fourth) · <strong>La Sqala</strong> (replaced by Le Rooftop @ Royal Mansour Casablanca).</p>
+  <!-- Hotels -->
+  <div class="booking-group">
+    <h3 class="group-title"><span class="group-icon">◆</span> Hotels</h3>
+    <div class="booking-cards">
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">Riad Fès <span class="dim">· Relais &amp; Châteaux</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">City</span><span class="v">Fez medina · 2 nights</span></div>
+          <div><span class="k">Dates</span><span class="v">Sat 8/29 – Mon 8/31</span></div>
+          <div><span class="k">Booking</span><span class="v">Chase Travel · confirmation 2497932249</span></div>
+          <div><span class="k">Guest</span><span class="v">Billy</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">Kasbah Tamadot <span class="dim">· Virgin Limited Edition</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">City</span><span class="v">Asni Valley · Atlas · 3 nights</span></div>
+          <div><span class="k">Dates</span><span class="v">Mon 8/31 – Thu 9/3</span></div>
+          <div><span class="k">Booking</span><span class="v">Chase Edit hybrid via Virgin</span></div>
+          <div><span class="k">Guest</span><span class="v">Tiffany Sou</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">La Mamounia</div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">City</span><span class="v">Marrakech · 3 nights</span></div>
+          <div><span class="k">Dates</span><span class="v">Thu 9/3 – Sun 9/6</span></div>
+          <div><span class="k">Booking</span><span class="v">Chase Travel · confirmation 2497573779</span></div>
+          <div><span class="k">Guest</span><span class="v">Billy</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">Casablanca Marriott Hotel</div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">City</span><span class="v">Casablanca · 1 night</span></div>
+          <div><span class="k">Dates</span><span class="v">Sun 9/6 – Mon 9/7</span></div>
+          <div><span class="k">Booking</span><span class="v">Marriott Bonvoy · #78815435</span></div>
+          <div><span class="k">Guest</span><span class="v">Billy</span></div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Dining -->
+  <div class="booking-group">
+    <h3 class="group-title"><span class="group-icon">◈</span> Dining</h3>
+    <div class="booking-cards">
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">La Grande Table Marocaine <span class="dim">· @ Royal Mansour Marrakech</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">When</span><span class="v">Thu 9/3 · 8:00 PM</span></div>
+          <div><span class="k">Menu</span><span class="v">Khiwan Alrabia prix fixe · MAD 1,800/pax</span></div>
+          <div><span class="k">Booking</span><span class="v">Direct via online form</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">L'Asiatique par Jean-Georges <span class="dim">· @ La Mamounia</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">When</span><span class="v">Sat 9/5 · 7:30 PM · à la carte</span></div>
+          <div><span class="k">Ref</span><span class="v">#4G7RHD4RCD9E</span></div>
+          <div><span class="k">Dress code</span><span class="v">Elegant · no plastic sandals · no shorts after 6 PM</span></div>
+        </div>
+      </div>
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">Le Rooftop <span class="dim">· @ Royal Mansour Casablanca</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">When</span><span class="v">Sun 9/6 · 8:00 PM</span></div>
+          <div><span class="k">Booking</span><span class="v">Direct via online form</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activities -->
+  <div class="booking-group">
+    <h3 class="group-title"><span class="group-icon">✧</span> Activities</h3>
+    <div class="booking-cards">
+
+      <div class="bcard confirmed">
+        <div class="bcard-head">
+          <div class="bcard-title">Casablanca Half-Day Tour <span class="dim">· + Hassan II Mosque interior</span></div>
+          <span class="pill pill-green">Confirmed</span>
+        </div>
+        <div class="bcard-meta">
+          <div><span class="k">When</span><span class="v">Sun 9/6 · 3:00 PM local · ~4.5 hours</span></div>
+          <div><span class="k">Operator</span><span class="v">City Services Tour · +212 700 794 885</span></div>
+          <div><span class="k">Ref</span><span class="v">BS9OYD · BR-1417654047 (Marriott Bonvoy T&amp;A)</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- In progress -->
+  <div class="booking-group">
+    <h3 class="group-title"><span class="group-icon">◉</span> In progress · awaiting reply</h3>
+    <div class="booking-cards">
+      <div class="bcard inprogress">
+        <div class="bcard-head">
+          <div class="bcard-title">Riad Fès Sat 8/29 van + guide</div>
+          <span class="pill pill-amber">Sent 7/1</span>
+        </div>
+        <div class="bcard-meta"><div><span class="k">Scope</span><span class="v">CMN → Moulay Idriss → Volubilis → Fez cultural drive day</span></div></div>
+      </div>
+      <div class="bcard inprogress">
+        <div class="bcard-head">
+          <div class="bcard-title">Agafay Desert buggy sunset + Bedouin dinner</div>
+          <span class="pill pill-amber">Sent 7/1</span>
+        </div>
+        <div class="bcard-meta"><div><span class="k">When</span><span class="v">Fri 9/4 · ~4:30 PM pickup at Mamounia</span></div></div>
+      </div>
+      <div class="bcard inprogress">
+        <div class="bcard-head">
+          <div class="bcard-title">The Ruined Garden · Fez dinner</div>
+          <span class="pill pill-amber">Sent 7/1</span>
+        </div>
+        <div class="bcard-meta"><div><span class="k">When</span><span class="v">Sat 8/29 · 7:30 PM</span></div></div>
+      </div>
+      <div class="bcard inprogress">
+        <div class="bcard-head">
+          <div class="bcard-title">Nur · Fez dinner</div>
+          <span class="pill pill-amber">Sent 7/1 (WhatsApp)</span>
+        </div>
+        <div class="bcard-meta"><div><span class="k">When</span><span class="v">Sun 8/30</span></div></div>
+      </div>
+      <div class="bcard inprogress">
+        <div class="bcard-head">
+          <div class="bcard-title">Kasbah Tamadot bundle</div>
+          <span class="pill pill-amber">Sent 7/1</span>
+        </div>
+        <div class="bcard-meta"><div><span class="k">Scope</span><span class="v">RAK driver Mon 8/31 · Toubkal foothills hike Wed AM · cooking class Wed PM</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skipped -->
+  <details class="skipped-details">
+    <summary><span class="group-icon">✕</span> Explicitly skipped <span class="dim">· tap to expand</span></summary>
+    <div class="skipped-list">
+      <div><strong>Meknes proper</strong> — kept Moulay Idriss viewpoint on the Sat drive.</div>
+      <div><strong>Terres d'Amanar</strong> Tue 9/1 — Wed's Toubkal hike + cooking class beats it on register-fit and property-ROI.</div>
+      <div><strong>Rick's Café Casablanca</strong> — closed for annual summer break; replaced by Le Rooftop.</div>
+      <div><strong>Essaouira day trip</strong> — 3-base rule, don't add a fourth.</div>
+      <div><strong>La Sqala</strong> — replaced by Le Rooftop @ Royal Mansour Casablanca.</div>
+    </div>
+  </details>
 </section>
 
 <!-- ============= AT A GLANCE ============= -->
@@ -388,6 +571,16 @@
     All bookings verified 2026-07-01 — re-verify closer to travel.
   </div>
 </footer>
+
+<!-- ============= MOBILE BOTTOM NAV ============= -->
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <div class="bottom-nav-inner">
+    <a href="#confirmed"><span class="bn-icon">◆</span><span>Bookings</span></a>
+    <a href="#glance"><span class="bn-icon">✧</span><span>Route</span></a>
+    <a href="#itinerary"><span class="bn-icon">☰</span><span>Days</span></a>
+    <a href="#notes"><span class="bn-icon">✎</span><span>Notes</span></a>
+  </div>
+</nav>
 
 </body>
 </html>
