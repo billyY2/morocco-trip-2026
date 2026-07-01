@@ -909,3 +909,60 @@ html, body { max-width: 100%; overflow-x: hidden; }
   }
   .bottom-nav-inner a { font-size: 10px; }
 }
+
+/* ========== iPhone-specific polish ==========
+   Billy = iPhone 12 (390pt). Tiffany = iPhone 17 lineup:
+   - iPhone 17 / 17 Pro: 402pt
+   - iPhone Air: 420pt
+   - iPhone 17 Pro Max: 440pt
+   Full covered range: 390pt – 440pt.
+*/
+
+/* Tighten bottom nav so 5 items breathe on 390pt */
+@media (max-width: 640px) {
+  .bottom-nav a {
+    font-size: 9.5px;
+    padding: 6px 2px;
+    gap: 3px;
+    letter-spacing: 0.01em;
+  }
+  .bottom-nav a .bn-icon {
+    width: 22px; height: 22px; font-size: 16px;
+  }
+  .bottom-nav-inner { max-width: 100%; }
+}
+
+/* 390pt (iPhone 12/13/14/15 base) */
+@media (max-width: 400px) {
+  section { padding: 44px 16px; }
+  .bottom-nav a { font-size: 9px; padding: 6px 1px; }
+  .cal-day { flex: 0 0 120px; }
+  .cal-day .cal-dom { font-size: 26px; }
+  .cal-chip { padding: 4px 9px; font-size: 10.5px; }
+  .cal-legend { gap: 5px; margin: 14px 0 18px; }
+}
+
+/* 402pt–440pt (iPhone 17 lineup — Tiffany's phone) */
+@media (min-width: 401px) and (max-width: 480px) {
+  section { padding: 56px 20px; }
+  .bottom-nav a { font-size: 10.5px; }
+  .cal-day { flex: 0 0 132px; min-height: 148px; }
+  .cal-day .cal-dom { font-size: 30px; }
+  .cal-day .cal-place { font-size: 13px; }
+  .cal-day .cal-sub { font-size: 11px; }
+  .cal-chip { padding: 6px 12px; font-size: 11.5px; }
+  .hero h1 { font-size: 40px; }
+  .hero .lede { font-size: 16px; }
+  .section-title { font-size: 26px; }
+}
+
+/* Dynamic Island / notch safe area (all recent iPhones) */
+.bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+body {
+  padding-bottom: calc(76px + env(safe-area-inset-bottom, 0));
+}
+@media (min-width: 641px) {
+  body { padding-bottom: 0; }
+}
