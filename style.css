@@ -760,3 +760,26 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 .dot-blue { background: #4a6e91; }
 .dot-gray-plan { background: #94867a; }
+
+/* View confirmation link (bottom of each card with an attached PDF) */
+.view-link {
+  display: inline-flex; align-items: center;
+  margin-top: 12px; padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--terracotta-dark); background: var(--sand-pale);
+  border: 1px solid var(--sand);
+  border-radius: 8px;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: background 0.15s ease, transform 0.1s ease;
+  grid-column: 1 / -1;
+}
+.view-link:hover {
+  background: #ecdec4;
+  color: var(--terracotta);
+  border-color: var(--terracotta);
+}
+.view-link:active { transform: scale(0.98); }
+
+@media (max-width: 640px) {
+  .view-link { font-size: 11px; padding: 7px 12px; margin-top: 10px; }
+}
