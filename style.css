@@ -710,3 +710,33 @@ html, body { max-width: 100%; overflow-x: hidden; }
   /* Scroll offset adjusts too */
   html { scroll-padding-top: 12px; }
 }
+
+/* Stacked pill — two-line label + sub-label */
+.pill-stacked {
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 5px 12px;
+  line-height: 1.1;
+  min-width: 96px;
+}
+.pill-stacked .pill-line1 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pill-stacked .pill-line2 {
+  font-size: 9.5px;
+  font-weight: 600;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Mobile — keep stacked pill legible */
+@media (max-width: 640px) {
+  .pill-stacked { padding: 5px 10px; min-width: 88px; }
+  .pill-stacked .pill-line1 { font-size: 10px; }
+  .pill-stacked .pill-line2 { font-size: 9px; }
+}
